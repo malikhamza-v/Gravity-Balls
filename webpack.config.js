@@ -7,6 +7,7 @@ module.exports = {
   output: {
     path: __dirname + "/dist/",
     filename: "./js/index.[name].js",
+    clean: true,
   },
   module: {
     rules: [
@@ -27,6 +28,10 @@ module.exports = {
             loader: "file-loader",
           },
         ],
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        use: ["style-loader", "css-loader", "sass-loader"],
       },
     ],
   },
