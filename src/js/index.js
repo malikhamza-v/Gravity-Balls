@@ -1,2 +1,2 @@
-import "../styles/main.scss";
+import canvas from "./canvas";
 console.log("---Index_file");
