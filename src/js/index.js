@@ -19,6 +19,16 @@ let offsets = [];
 let toolTipAnims = [];
 let ih = window.innerHeight;
 
+window.addEventListener("load", () => {
+  const loader = document.querySelector(".loader");
+
+  loader.classList.add("!hidden");
+
+  loader.addEventListener("transitionend", () => {
+    document.body.removeChild("loader");
+  });
+});
+
 // create nev dots and add tooltip listeners
 for (let i = 0; i < slides.length; i++) {
   let tl = gsap.timeline({ paused: true, reversed: true });
