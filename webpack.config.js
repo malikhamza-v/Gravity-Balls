@@ -8,6 +8,7 @@ module.exports = {
     path: __dirname + "/dist/",
     filename: "./js/index.[name].js",
     clean: true,
+    assetModuleFilename: "[name][ext]",
   },
   module: {
     rules: [
@@ -22,12 +23,8 @@ module.exports = {
         },
       },
       {
-        test: /\.(png|jpe?g|gif)$/i,
-        use: [
-          {
-            loader: "file-loader",
-          },
-        ],
+        test: /\.(svg|png|jpg|jpeg|gif)$/,
+        type: "asset/resource",
       },
       {
         test: /\.s[ac]ss$/i,

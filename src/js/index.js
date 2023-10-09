@@ -1,18 +1,14 @@
 import "../styles/global.scss";
 import canvas, { init } from "../js/canvas";
-console.log("---Index_file");
-import gsap, { Linear, Draggable } from "gsap";
+import cursor from "../js/cursor";
+import gsap from "gsap";
+import ClusterBalls from "../assets/cluster-balls.png";
 
 console.clear();
 
-const colorArray = [
-  "#426F42",
-  "#262626",
-  "#36648B",
-  "#683A5E",
-  "#683A5E",
-  "#36648B",
-];
+const clusterImage = document.getElementById("cluster-balls-image");
+clusterImage.src = ClusterBalls;
+
 const slides = document.querySelectorAll("section");
 const container = document.querySelector("#panelWrap");
 let oldSlide = 0;
@@ -26,7 +22,7 @@ let ih = window.innerHeight;
 // create nev dots and add tooltip listeners
 for (let i = 0; i < slides.length; i++) {
   let tl = gsap.timeline({ paused: true, reversed: true });
-  gsap.set(slides[i], { backgroundColor: colorArray[i] });
+  gsap.set(slides[i], { backgroundColor: "#fff" });
   let newDot = document.createElement("div");
   newDot.className = "dot";
   newDot.index = i;
@@ -37,8 +33,6 @@ for (let i = 0; i < slides.length; i++) {
   offsets.push(-slides[i].offsetTop);
   toolTipAnims.push(tl);
 }
-
-// get elements positioned
 
 // side screen animation with nav dots
 
@@ -91,22 +85,8 @@ function slideAnim(e) {
 window.addEventListener("wheel", slideAnim);
 window.addEventListener("resize", newSize);
 
-// make the container a draggable element
-// let dragMe = Draggable.create(container, {
-//   type: "y",
-//   edgeResistance: 1,
-//   onDragEnd: slideAnim,
-//   snap: offsets,
-//   inertia: true,
-//   zIndexBoost: false,
-//   allowNativeTouchScrolling: false,
-//   bounds: "#masterWrap",
-// });
-
-// dragMe[0].id = "dragger";
 newSize();
 
-// resize all panels and refigure draggable snap array
 function newSize() {
   offsets = [];
   ih = window.innerHeight;
@@ -116,5 +96,4 @@ function newSize() {
     offsets.push(-slides[i].offsetTop);
   }
   gsap.set(container, { y: offsets[activeSlide] });
-  // dragMe[0].vars.snap = offsets;
 }

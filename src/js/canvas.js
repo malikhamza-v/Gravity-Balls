@@ -48,6 +48,7 @@ class Ball {
     c.beginPath();
     c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
     c.fillStyle = this.color;
+    c.globalAlpha = 0.8;
     c.fill();
     c.stroke();
     c.closePath();
