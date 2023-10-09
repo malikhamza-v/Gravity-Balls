@@ -70,11 +70,10 @@ class Ball {
 }
 
 // Implementation
-var ball;
 var ballArray;
 function init() {
   ballArray = [];
-  for (let i = 0; i < 1; i++) {
+  for (let i = 0; i < 50; i++) {
     var radius = randomIntFromRange(20, 40);
     var x = randomIntFromRange(radius, canvas.width - radius);
     var y = randomIntFromRange(0, canvas.height - radius);
@@ -96,3 +95,5 @@ function animate() {
 
 init();
 animate();
+
+export { init, animate };

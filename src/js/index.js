@@ -1,6 +1,8 @@
 import "../styles/global.scss";
+import canvas, { init } from "../js/canvas";
 console.log("---Index_file");
-import gsap from "gsap";
+import gsap, { Linear, Draggable } from "gsap";
+
 console.clear();
 
 const colorArray = [
@@ -11,21 +13,40 @@ const colorArray = [
   "#683A5E",
   "#36648B",
 ];
-
 const slides = document.querySelectorAll("section");
 const container = document.querySelector("#panelWrap");
 let oldSlide = 0;
 let activeSlide = 0;
+let navDots = [];
 let dur = 0.6;
 let offsets = [];
 let toolTipAnims = [];
 let ih = window.innerHeight;
 
+// create nev dots and add tooltip listeners
 for (let i = 0; i < slides.length; i++) {
   let tl = gsap.timeline({ paused: true, reversed: true });
   gsap.set(slides[i], { backgroundColor: colorArray[i] });
+  let newDot = document.createElement("div");
+  newDot.className = "dot";
+  newDot.index = i;
+  navDots.push(newDot);
+  newDot.addEventListener("click", slideAnim);
+  newDot.addEventListener("mouseenter", dotHover);
+  newDot.addEventListener("mouseleave", dotHover);
   offsets.push(-slides[i].offsetTop);
   toolTipAnims.push(tl);
+}
+
+// get elements positioned
+
+// side screen animation with nav dots
+
+// tooltips hovers
+function dotHover() {
+  toolTipAnims[this.index].reversed()
+    ? toolTipAnims[this.index].play()
+    : toolTipAnims[this.index].reverse();
 }
 
 // figure out which of the 4 nav controls called the function
@@ -62,14 +83,27 @@ function slideAnim(e) {
     gsap.to(container, dur, {
       y: offsets[activeSlide],
       ease: "power2.inOut",
+      onUpdate: init(),
     });
   }
 }
 
-gsap.set(".hideMe", { opacity: 1 });
 window.addEventListener("wheel", slideAnim);
 window.addEventListener("resize", newSize);
 
+// make the container a draggable element
+// let dragMe = Draggable.create(container, {
+//   type: "y",
+//   edgeResistance: 1,
+//   onDragEnd: slideAnim,
+//   snap: offsets,
+//   inertia: true,
+//   zIndexBoost: false,
+//   allowNativeTouchScrolling: false,
+//   bounds: "#masterWrap",
+// });
+
+// dragMe[0].id = "dragger";
 newSize();
 
 // resize all panels and refigure draggable snap array
@@ -82,4 +116,5 @@ function newSize() {
     offsets.push(-slides[i].offsetTop);
   }
   gsap.set(container, { y: offsets[activeSlide] });
+  // dragMe[0].vars.snap = offsets;
 }
