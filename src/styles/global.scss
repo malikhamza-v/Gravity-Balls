@@ -86,6 +86,11 @@ section {
     visibility 0.75s;
 }
 
+.loader_hidden {
+  display: none !important;
+  visibility: hidden !important;
+}
+
 .grow_small {
   transform: scale(2);
   background: #fff;
