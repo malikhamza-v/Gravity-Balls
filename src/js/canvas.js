@@ -83,7 +83,6 @@ function init() {
     var color = randomColor(colors);
     ballArray.push(new Ball(x, y, dy, dx, radius, color));
   }
-  console.log("===", ballArray);
 }
 
 // Animation Loop

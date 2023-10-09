@@ -189,8 +189,6 @@ function init() {
     var color = Object(_utils__WEBPACK_IMPORTED_MODULE_0__["randomColor"])(colors);
     ballArray.push(new Ball(x, y, dy, dx, radius, color));
   }
-
-  console.log("===", ballArray);
 } // Animation Loop
 
 
