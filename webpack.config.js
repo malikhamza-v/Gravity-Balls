@@ -2,7 +2,15 @@ const BrowserSyncPlugin = require("browser-sync-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  mode: "development",
+  mode: "production",
+  performance: {
+    hints: false,
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000,
+  },
+  watchOptions: {
+    ignored: "**/node_modules",
+  },
   entry: { bundle: "./src/js/index.js" },
   output: {
     path: __dirname + "/dist/",
@@ -46,6 +54,5 @@ module.exports = {
       template: "src/index.html",
     }),
   ],
-  watch: true,
   devtool: "source-map",
 };
